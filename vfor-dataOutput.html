@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <style>
+        #root {
+            display: flex;
+            align-items: center;
+        }
+        
+        .card {
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: slategrey;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            width: 200px;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+    <div id="root">
+        <ul class="list">
+            <person-card class="card" v-for="person in people" :person="person" :key="person.id">
+
+            </person-card>
+        </ul>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component('person-card', {
+        props: ['person'],
+        template: `
+        <div>
+        <p>{{ person.name }}</p>
+        <p>D.O.B: {{ person.dob }}</p>
+        <p>City: {{ person.city }}</p>
+        <p>Country: {{ person.country }}</p>
+        <br> 
+        </div>
+        `
+    })
+
+    let app = new Vue({
+        el: '#root',
+        data: {
+            people: [
+                { id: 1, name: 'John Brown', dob: '1985/03/25', city: 'London', country: 'United Kingdom' },
+                { id: 2, name: 'James Waits', dob: '1995/11/06', city: 'Paris', country: 'France' },
+                { id: 3, name: 'Kieran Duvell', dob: '1999/07/03', city: 'Madrid', country: 'Spain' },
+                { id: 4, name: 'Adam Jones', dob: '1961/04/21', city: 'Amsterdam', country: 'Netherlands' },
+            ]
+        },
+    })
+</script>
+</body>
+</html>
