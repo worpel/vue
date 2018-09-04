@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Axios Data Fetch with </title>
+</head>
+<body>
+<style>
+
+    * {
+        margin: 0;
+    }
+
+    body {
+        height: 100%;
+        min-height: 100%;
+        background-size: cover;
+        background: linear-gradient(#79BEEE, #504C84) fixed;
+    }
+
+    #app {
+        /* margin: auto; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #container {
+        margin-top: 200px;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    #quote {
+        font-size: 5rem;
+        color: white;
+        text-shadow: 2px 2px #B7D3F2, 4px 4px #8A84E2;
+    }
+
+    .link {
+        text-decoration: none;
+        color: #79BEEE;
+        border-bottom: 5px solid #504C84;
+    }
+
+    #author {
+        margin-top: 20px;
+        font-size: 2.5em;
+        color: #84AFE6;
+        text-shadow: #504C84 1px 1px;
+    }
+</style>
+    <div id="app">
+        <div id="container">
+            <span id="quote" v-html="quote.content"></span>
+            <p><a id="author" class="link" :href="quote.link">- <span v-html="quote.title"></span></a></p>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script>
+    var vm = new Vue ({
+        el: '#app',
+        data() {
+            return {
+                quote: null,
+            }
+        },
+        mounted() {
+            axios
+                .get('http://www.quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1')
+                .then(response => (this.quote = response.data[0]))
+        }
+    }) 
+</script>
+</body>
+</html>
